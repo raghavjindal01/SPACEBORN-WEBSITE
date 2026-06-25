@@ -160,7 +160,7 @@ export default function HomePage() {
             <li><a href="#simulation">SIMULATION</a></li>
             <li><a href="#systems">SYSTEMS</a></li>
             <li><a href="#thoth">THOTH</a></li>
-            <li><a href="#khonsu">KHONSU</a></li>
+            <li><a href="https://khonsu.in" target="_blank" rel="noopener noreferrer">KHONSU</a></li>
             <li><a href="#simulators-hub">COMPANY</a></li>
           </ul>
           <a href="#releases" className="btn font-mono desktop-only">UPCOMING RELEASES →</a>

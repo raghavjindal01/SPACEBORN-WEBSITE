@@ -20,7 +20,7 @@ export default function PartnersPage() {
             <li><Link href="/#simulation">SIMULATION</Link></li>
             <li><Link href="/#systems">SYSTEMS</Link></li>
             <li><Link href="/#thoth">THOTH</Link></li>
-            <li><Link href="/#khonsu">KHONSU</Link></li>
+            <li><a href="https://khonsu.in" target="_blank" rel="noopener noreferrer">KHONSU</a></li>
             <li><Link href="/#simulators-hub">COMPANY</Link></li>
           </ul>
           <Link href="/#releases" className="btn font-mono desktop-only">UPCOMING RELEASES →</Link>
