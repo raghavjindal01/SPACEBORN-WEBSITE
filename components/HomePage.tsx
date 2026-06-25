@@ -93,16 +93,27 @@ export default function HomePage() {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleToggleSound = () => {
     const video = heroVideoRef.current;
+    const audio = audioRef.current;
+    const nextMuted = !isHeroMuted;
+    
+    setIsHeroMuted(nextMuted);
+    
     if (video) {
-      const nextMuted = !isHeroMuted;
       video.muted = nextMuted;
-      setIsHeroMuted(nextMuted);
       video.play().catch((err) => console.log("Play failed on sound toggle:", err));
-    } else {
-      setIsHeroMuted(!isHeroMuted);
+    }
+    
+    if (audio) {
+      audio.muted = nextMuted;
+      if (!nextMuted) {
+        audio.play().catch((err) => console.log("Audio play failed:", err));
+      } else {
+        audio.pause();
+      }
     }
   };
 
@@ -182,6 +193,12 @@ export default function HomePage() {
             >
               <source src="/assets/spaceborn-hero-GIF.mp4" type="video/mp4" />
             </video>
+            <audio 
+              ref={audioRef}
+              src="/assets/spaceborn-hero-GIF-audio.mp3"
+              loop
+              preload="auto"
+            />
             <div className="video-overlay" />
           </div>
           <div className="section-content">
@@ -287,6 +304,9 @@ export default function HomePage() {
 
         {/* Page 5: Putting Humans at the Center (Desktop) */}
         <section className="landing-section section-right desktop-only" id="thoth">
+          <div className="image-background-container">
+            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background" />
+          </div>
           <div className="section-content">
             <h2 className="section-title">
               PUTTING HUMANS AT THE<br />CENTER OF AUTONOMY
@@ -302,6 +322,9 @@ export default function HomePage() {
 
         {/* Page 5: Putting Humans at the Center (Mobile - Context) */}
         <section className="landing-section section-left mobile-only" id="thoth">
+          <div className="image-background-container">
+            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background" />
+          </div>
           <div className="section-content">
             <h2 className="section-title">
               PUTTING <br className="mob-br" />HUMANS AT THE <br className="mob-br" />CENTER OF <br className="mob-br" />AUTONOMY
@@ -319,6 +342,9 @@ export default function HomePage() {
 
         {/* Page 6: Putting Humans at the Center (Mobile - Human Intent) */}
         <section className="landing-section section-left mobile-only" id="khonsu">
+          <div className="image-background-container">
+            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background" />
+          </div>
           <div className="section-content">
             <h2 className="section-title">
               PUTTING <br className="mob-br" />HUMANS AT THE <br className="mob-br" />CENTER OF <br className="mob-br" />AUTONOMY
