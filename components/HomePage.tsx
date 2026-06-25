@@ -225,7 +225,7 @@ export default function HomePage() {
         <section className="landing-section section-left" id="platforms">
           <div className="video-background-container">
             <video autoPlay muted loop playsInline className="video-background">
-              <source src="/assets/cybernoid_human.mp4" type="video/mp4" />
+              <source src="/assets/robot-intent-section-two-vid.mp4" type="video/mp4" />
             </video>
             <div className="video-overlay" />
           </div>
