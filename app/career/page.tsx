@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import MobileMenu from '../../components/MobileMenu';
+import Footer from '../../components/Footer';
 
 export const metadata = {
   title: 'Careers | Spaceborn',
@@ -102,24 +103,7 @@ export default function CareerPage() {
         </section>
 
         {/* Footer Overlay */}
-        <footer className="simulators-scroll-section footer-wrapper-responsive">
-          <div className="footer-fixed" style={{ borderTop: 'none' }}>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="linkedin-link" aria-label="Spaceborn LinkedIn">
-              <img src="/assets/linkedin-icon.png" alt="LinkedIn Logo" />
-            </a>
-
-            <ul className="footer-nav">
-              <li><Link href="/career">CAREERS</Link></li>
-              <li><Link href="/#releases">UPDATES</Link></li>
-              <li><a href="#">PRIVACY POLICY</a></li>
-              <li><Link href="/partners">PARTNERS</Link></li>
-            </ul>
-
-            <span className="footer-copyright">
-              COPYRIGHT © 2026 SPACEBORN
-            </span>
-          </div>
-        </footer>
+        <Footer isHome={false} />
       </main>
     </>
   );

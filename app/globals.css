@@ -804,7 +804,7 @@ a {
     font-size: 10px;
   }
 
-  .linkedin-link {
+  .footer-social-group {
     order: 3;
   }
 
@@ -888,6 +888,336 @@ a {
   .scroll-progress-wrapper {
     width: 200px;
   }
+}
+
+/* Hero Buttons Container */
+.hero-btn-group {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  z-index: 5;
+}
+
+/* Resume Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(1, 1, 1, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-container {
+  background: #0d0d0d;
+  border: 1px solid var(--border-c);
+  border-radius: 4px;
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-container::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-container::-webkit-scrollbar-thumb {
+  background: var(--border-c);
+  border-radius: 3px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: 1px solid var(--border-c);
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  border-color: var(--text);
+  background: rgba(241, 242, 236, 0.05);
+  box-shadow: 0 0 10px rgba(241, 242, 236, 0.1);
+}
+
+.modal-body {
+  padding: 40px;
+}
+
+.modal-title {
+  font-size: clamp(20px, 2.5vw, 24px);
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: var(--dim);
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.form-input {
+  background: #141414;
+  border: 1px solid var(--border-c);
+  color: var(--text);
+  padding: 12px 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.form-input:focus {
+  border-color: var(--text);
+  background: #181818;
+}
+
+.form-input::placeholder {
+  color: rgba(241, 242, 236, 0.2);
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.file-dropzone {
+  border: 1px dashed var(--border-c);
+  border-radius: 4px;
+  padding: 30px 20px;
+  text-align: center;
+  background: #141414;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.file-dropzone:hover,
+.file-dropzone.dragover {
+  border-color: var(--text);
+  background: rgba(241, 242, 236, 0.02);
+}
+
+.file-dropzone-icon {
+  color: var(--dim);
+  transition: color 0.3s ease;
+}
+
+.file-dropzone:hover .file-dropzone-icon {
+  color: var(--text);
+}
+
+.file-dropzone-text {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.file-dropzone-subtext {
+  font-size: 10px;
+  color: var(--dim);
+}
+
+.selected-file-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a1a1a;
+  border: 1px solid var(--border-c);
+  padding: 12px 16px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.selected-file-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selected-file-remove {
+  background: transparent;
+  border: none;
+  color: var(--dim);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  transition: color 0.3s ease;
+}
+
+.selected-file-remove:hover {
+  color: var(--red);
+}
+
+.form-error-banner {
+  background: rgba(229, 72, 72, 0.1);
+  border: 1px solid var(--red);
+  color: var(--text);
+  padding: 12px 16px;
+  font-size: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+.success-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.success-icon-wrapper {
+  color: #4cd964;
+  margin-bottom: 24px;
+  animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.success-title {
+  font-size: 20px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.success-message {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.6;
+  max-width: 360px;
+  margin-bottom: 30px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 580px) {
+  .modal-container {
+    max-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+  }
+  .modal-body {
+    padding: 30px 20px;
+  }
+  .modal-close-btn {
+    top: 20px;
+    right: 20px;
+  }
+  .hero-btn-group {
+    width: 100%;
+  }
+  .hero-btn-group .btn {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+/* Footer Social Group & CEO Button */
+.footer-social-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ceo-contact-btn {
+  background: transparent;
+  border: 1px solid var(--border-c);
+  color: var(--text);
+  padding: 8px 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.ceo-contact-btn:hover {
+  border-color: var(--text);
+  background: rgba(241, 242, 236, 0.05);
+  box-shadow: 0 0 10px rgba(241, 242, 236, 0.1);
 }
 
 

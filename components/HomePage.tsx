@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import MobileMenu from './MobileMenu';
+import ResumeModal from './ResumeModal';
+import Footer from './Footer';
 
 type SimulatorData = {
   id: string;
@@ -87,45 +89,34 @@ const simulators: SimulatorData[] = [
 
 export default function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isHeroMuted, setIsHeroMuted] = useState(false);
+  const [isHeroMuted, setIsHeroMuted] = useState(true);
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  const handleToggleSound = () => {
+    const video = heroVideoRef.current;
+    if (video) {
+      const nextMuted = !isHeroMuted;
+      video.muted = nextMuted;
+      setIsHeroMuted(nextMuted);
+      video.play().catch((err) => console.log("Play failed on sound toggle:", err));
+    } else {
+      setIsHeroMuted(!isHeroMuted);
+    }
+  };
 
   useEffect(() => {
     const video = heroVideoRef.current;
     if (!video) return;
 
-    // Attempt unmuted autoplay
-    video.muted = false;
-    const playPromise = video.play();
+    // Start muted to ensure autoplay is allowed on all browsers
+    video.muted = true;
+    setIsHeroMuted(true);
 
-    if (playPromise !== undefined) {
-      playPromise.catch((error) => {
-        console.log("Unmuted autoplay blocked, playing muted instead:", error);
-        
-        // Fallback: play muted to guarantee autoplay works on entry
-        video.muted = true;
-        setIsHeroMuted(true);
-        video.play().catch(err => console.log("Muted autoplay blocked too:", err));
-
-        // Auto-unmute on first user interaction
-        const unmuteOnInteraction = () => {
-          video.muted = false;
-          setIsHeroMuted(false);
-          video.play().catch(err => console.log("Play failed on interaction:", err));
-          
-          document.removeEventListener('click', unmuteOnInteraction);
-          document.removeEventListener('scroll', unmuteOnInteraction);
-          document.removeEventListener('touchstart', unmuteOnInteraction);
-          document.removeEventListener('keydown', unmuteOnInteraction);
-        };
-
-        document.addEventListener('click', unmuteOnInteraction);
-        document.addEventListener('scroll', unmuteOnInteraction);
-        document.addEventListener('touchstart', unmuteOnInteraction);
-        document.addEventListener('keydown', unmuteOnInteraction);
-      });
-    }
+    video.play().catch((error) => {
+      console.log("Muted autoplay blocked initially:", error);
+    });
   }, []);
 
   useEffect(() => {
@@ -197,9 +188,17 @@ export default function HomePage() {
             <h1 className="section-title">
               CERTAINTY <br className="mob-br" />IS <br className="desk-br" />READY <br className="mob-br" />FOR FLIGHT
             </h1>
-            <a href="#platforms" className="btn font-mono">
-              explore
-            </a>
+            <div className="hero-btn-group">
+              <a href="#platforms" className="btn font-mono">
+                explore
+              </a>
+              <button 
+                onClick={() => setIsResumeModalOpen(true)} 
+                className="btn font-mono btn-primary"
+              >
+                share your resume
+              </button>
+            </div>
           </div>
         </section>
 
@@ -365,28 +364,13 @@ export default function HomePage() {
           </div>
 
           {/* Persistent Footer Overlay */}
-          <footer className="footer-fixed">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="linkedin-link" aria-label="Spaceborn LinkedIn">
-              <img src="/assets/linkedin-icon.png" alt="LinkedIn Logo" />
-            </a>
-
-            <ul className="footer-nav">
-              <li><Link href="/career">CAREERS</Link></li>
-              <li><a href="#releases">UPDATES</a></li>
-              <li><a href="#">PRIVACY POLICY</a></li>
-              <li><Link href="/partners">PARTNERS</Link></li>
-            </ul>
-
-            <span className="footer-copyright">
-              COPYRIGHT © 2026 SPACEBORN
-            </span>
-          </footer>
+          <Footer isHome={true} />
         </section>
       </main>
 
       {/* Global Sound Control */}
       <button 
-        onClick={() => setIsHeroMuted(!isHeroMuted)} 
+        onClick={handleToggleSound} 
         className="global-sound-toggle"
         aria-label={isHeroMuted ? "Unmute background audio" : "Mute background audio"}
       >
@@ -405,6 +389,10 @@ export default function HomePage() {
         )}
         <span className="sound-text font-mono">{isHeroMuted ? "SOUND OFF" : "SOUND ON"}</span>
       </button>
+
+      {isResumeModalOpen && (
+        <ResumeModal onClose={() => setIsResumeModalOpen(false)} />
+      )}
     </>
   );
 }
