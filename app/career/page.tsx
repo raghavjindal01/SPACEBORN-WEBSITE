@@ -51,7 +51,7 @@ export default function CareerPage() {
             <a href="#internships">INTERNSHIPS</a>
           </div>
 
-          <div className="mobile-only" style={{ marginTop: '40px' }}>
+          <div className="mobile-only">
             <a href="#internships" className="btn font-mono">
               INTERNSHIPS
             </a>

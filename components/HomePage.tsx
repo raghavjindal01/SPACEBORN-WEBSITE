@@ -159,6 +159,20 @@ export default function HomePage() {
     };
   }, []);
 
+  const handlePrev = () => {
+    const container = containerRef.current;
+    if (container) {
+      container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
+    }
+  };
+
+  const handleNext = () => {
+    const container = containerRef.current;
+    if (container) {
+      container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
+    }
+  };
+
   return (
     <>
       <header className="navbar-wrapper">
@@ -231,10 +245,14 @@ export default function HomePage() {
           </div>
           <div className="section-content">
             <h2 className="section-title">
-              ALIGNING HUMAN <br className="mob-br" />INTENT <br className="desk-br" />WITH <br className="mob-br" />ROBOT ACTION
+              ALIGNING HUMAN <br />
+              INTENT WITH <br />
+              ROBOT ACTION
             </h2>
             <p className="section-body desktop-only">
-              We believe a future where anyone can work with autonomous systems through natural conversation is fundamentally more powerful than one where only engineers can.
+              We believe a future where anyone can work with autonomous <br className="desk-br" />
+              systems through natural conversation is fundamentally <br className="desk-br" />
+              more powerful than one where only engineers can.
             </p>
             <p className="section-body mobile-only">
               We believe a future where only the hot work is left to autonomous systems through robust collaboration that is inherently transparent for dynamic and open environments.
@@ -362,6 +380,26 @@ export default function HomePage() {
 
         {/* Page 6: Simulators Horizontal Scroll Container */}
         <section className="simulators-scroll-section" id="simulators-hub">
+          <button 
+            onClick={handlePrev}
+            className={`sim-nav-btn sim-prev-btn ${scrollProgress <= 1 ? 'disabled' : ''}`}
+            aria-label="Previous simulator"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          
+          <button 
+            onClick={handleNext}
+            className={`sim-nav-btn sim-next-btn ${scrollProgress >= 99 ? 'disabled' : ''}`}
+            aria-label="Next simulator"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
           <div className="simulators-scroll-container" ref={containerRef}>
             {simulators.map((sim) => (
               <div 
