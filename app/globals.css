@@ -401,6 +401,10 @@ a {
   box-sizing: border-box;
 }
 
+#sim-lidar-depth {
+  background-position: right center;
+}
+
 .sim-content {
   max-width: 700px;
   display: flex;

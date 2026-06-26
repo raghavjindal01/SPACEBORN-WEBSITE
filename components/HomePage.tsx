@@ -32,6 +32,7 @@ const simulators: SimulatorData[] = [
     title: 'ANSA DIGITAL TWIN SIMULATOR',
     desc: 'Build it once. Fly it a thousand times. A living digital replica where systems are tested, broken, and perfected before a single component is manufactured.',
     cta: 'EXPLORE THE DIGITAL TWIN',
+    image: '/assets/ansa-digital-twin.jpg',
   },
   {
     id: 'fault-failure',
@@ -63,6 +64,7 @@ const simulators: SimulatorData[] = [
     title: 'LiDAR & DEPTH PERCEPTION SIMULATOR',
     desc: 'Teach machines to see the world in three dimensions. Generate massive volumes of spatial intelligence for mapping, navigation, and next-generation perception systems.',
     cta: 'EXPLORE MACHINE PERCEPTION',
+    image: '/assets/lidar-sim-new.jpg',
   },
   {
     id: 'khonsu-space',
