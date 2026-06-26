@@ -395,6 +395,7 @@ a {
   padding: 0 48px;
   background-color: #010101;
   background-size: cover;
+  background-image: var(--bg-image);
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
@@ -946,6 +947,7 @@ a {
   .simulator-panel {
     height: auto !important;
     padding: 0 24px 60px !important;
+    background-image: var(--bg-image-mobile) !important;
   }
   .scroll-indicator-container {
     position: static;

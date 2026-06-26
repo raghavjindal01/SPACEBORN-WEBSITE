@@ -15,6 +15,7 @@ type SimulatorData = {
   desc: string;
   cta: string;
   image?: string;
+  imageMobile?: string;
 };
 
 const simulators: SimulatorData[] = [
@@ -25,6 +26,7 @@ const simulators: SimulatorData[] = [
     desc: 'The digital heartbeat of ANSA. Every decision, every control loop, and every autonomous action begins here before reaching the real world.',
     cta: 'ENTER THE CORE',
     image: '/assets/sitl_kernel_simulator_img.jpg',
+    imageMobile: '/assets/mobile/asset-6.jpg',
   },
   {
     id: 'digital-twin',
@@ -33,6 +35,7 @@ const simulators: SimulatorData[] = [
     desc: 'Build it once. Fly it a thousand times. A living digital replica where systems are tested, broken, and perfected before a single component is manufactured.',
     cta: 'EXPLORE THE DIGITAL TWIN',
     image: '/assets/ansa-digital-twin.jpg',
+    imageMobile: '/assets/mobile/asset-7.jpg',
   },
   {
     id: 'fault-failure',
@@ -41,6 +44,7 @@ const simulators: SimulatorData[] = [
     desc: "Failure isn't avoided. It's engineered for. Push autonomous systems through catastrophic scenarios and prove they can survive when everything goes wrong.",
     cta: 'TEST THE LIMITS',
     image: '/assets/fault_failure_simulator_img.jpg',
+    imageMobile: '/assets/mobile/asset-8.jpg',
   },
   {
     id: 'gps-denied',
@@ -49,6 +53,7 @@ const simulators: SimulatorData[] = [
     desc: 'When satellites disappear, autonomy takes over. Train intelligent systems to navigate confidently through urban canyons, tunnels, and contested environments.',
     cta: 'ENTER DENIED TERRITORY',
     image: '/assets/gps_denied_simulator_img.jpg',
+    imageMobile: '/assets/mobile/asset-9.jpg',
   },
   {
     id: 'swarm-fleet',
@@ -57,6 +62,7 @@ const simulators: SimulatorData[] = [
     desc: 'One vehicle is impressive. One hundred moving as a single intelligence changes everything. Validate coordinated autonomy at fleet scale.',
     cta: 'COMMAND THE SWARM',
     image: '/assets/swarm_simulator_img.jpg',
+    imageMobile: '/assets/mobile/asset-10.jpg',
   },
   {
     id: 'lidar-depth',
@@ -65,6 +71,7 @@ const simulators: SimulatorData[] = [
     desc: 'Teach machines to see the world in three dimensions. Generate massive volumes of spatial intelligence for mapping, navigation, and next-generation perception systems.',
     cta: 'EXPLORE MACHINE PERCEPTION',
     image: '/assets/lidar-sim-new.jpg',
+    imageMobile: '/assets/mobile/asset-11.jpg',
   },
   {
     id: 'khonsu-space',
@@ -73,6 +80,7 @@ const simulators: SimulatorData[] = [
     desc: 'Built for the environments where human control becomes impossible. Validate autonomous systems across orbital operations, lunar missions, and the future of deep-space exploration.',
     cta: 'EXPLORE BEYOND EARTH',
     image: '/assets/khonshu-space-simulator-img.jpg',
+    imageMobile: '/assets/mobile/asset-12.jpg',
   },
   {
     id: 'telemetry-anomaly',
@@ -81,6 +89,7 @@ const simulators: SimulatorData[] = [
     desc: 'The difference between a mission and a failure is knowing what happens next. Train AI systems to identify anomalies before they become critical events.',
     cta: 'PREDICT THE UNEXPECTED',
     image: '/assets/telemetry_simulator_img.jpg',
+    imageMobile: '/assets/mobile/asset-13.jpg',
   },
   {
     id: 'hal-portability',
@@ -89,6 +98,7 @@ const simulators: SimulatorData[] = [
     desc: 'One intelligence. Infinite hardware. Certify autonomous systems across platforms without rewriting the software that powers them.',
     cta: 'VALIDATE COMPATIBILITY',
     image: '/assets/hal_portability_simulator_img.jpg',
+    imageMobile: '/assets/mobile/asset-14.jpg',
   },
 ];
 
@@ -214,14 +224,17 @@ export default function HomePage() {
               playsInline 
               className="video-background"
             >
+              <source media="(max-width: 1100px)" src="/assets/mobile/asset-1.mp4" type="video/mp4" />
               <source src="/assets/spaceborn-hero-GIF.mp4" type="video/mp4" />
             </video>
             <audio 
               ref={audioRef}
-              src="/assets/spaceborn-hero-GIF-audio.mp3"
               loop
               preload="auto"
-            />
+            >
+              <source media="(max-width: 1100px)" src="/assets/mobile/asset-1.mp3" type="audio/mp3" />
+              <source src="/assets/spaceborn-hero-GIF-audio.mp3" type="audio/mp3" />
+            </audio>
             <div className="video-overlay" />
           </div>
           <div className="section-content">
@@ -255,7 +268,7 @@ export default function HomePage() {
           </div>
           <div className="video-background-container mobile-only">
             <video autoPlay muted loop playsInline className="video-background">
-              <source src="/assets/drone_flies_through_mobile.mp4" type="video/mp4" />
+              <source src="/assets/mobile/asset-2.mp4" type="video/mp4" />
             </video>
             <div className="video-overlay" />
           </div>
@@ -288,7 +301,8 @@ export default function HomePage() {
         <section className="landing-section section-right" id="simulation">
 
           <div className="image-background-container">
-            <img src="/assets/explore-ansa-img.jpg" alt="Making Autonomy Human-Centric" className="image-background explore-ansa-bg" />
+            <img src="/assets/explore-ansa-img.jpg" alt="Making Autonomy Human-Centric" className="image-background explore-ansa-bg desktop-only" />
+            <img src="/assets/mobile/asset-3.jpg" alt="Making Autonomy Human-Centric" className="image-background explore-ansa-bg mobile-only" />
             <div className="overlay-right-dark" />
           </div>
           <div className="section-content">
@@ -319,7 +333,8 @@ export default function HomePage() {
         <section className="landing-section section-left" id="systems">
 
           <div className="image-background-container">
-            <img src="/assets/book-your-flight-section-img.jpg" alt="Building the Systems of Autonomy" className="image-background systems-autonomy-bg" />
+            <img src="/assets/book-your-flight-section-img.jpg" alt="Building the Systems of Autonomy" className="image-background systems-autonomy-bg desktop-only" />
+            <img src="/assets/mobile/asset-4.jpg" alt="Building the Systems of Autonomy" className="image-background systems-autonomy-bg mobile-only" />
             <div className="overlay-left-dark" />
           </div>
           <div className="section-content">
@@ -350,7 +365,8 @@ export default function HomePage() {
         {/* Page 5: Putting Humans at the Center */}
         <section className="landing-section section-right" id="thoth">
           <div className="image-background-container">
-            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background join-mission-bg" />
+            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background join-mission-bg desktop-only" />
+            <img src="/assets/mobile/asset-5.jpg" alt="Join Our Mission" className="image-background join-mission-bg mobile-only" />
           </div>
           <div className="section-content">
             <h2 className="section-title">
@@ -406,7 +422,14 @@ export default function HomePage() {
                 key={sim.id} 
                 className="simulator-panel" 
                 id={`sim-${sim.id}`}
-                style={sim.image ? { backgroundImage: `url(${sim.image})` } : undefined}
+                style={
+                  sim.image 
+                    ? { 
+                        '--bg-image': `url(${sim.image})`,
+                        '--bg-image-mobile': `url(${sim.imageMobile || sim.image})`
+                      } as React.CSSProperties 
+                    : undefined
+                }
               >
                 <div className="sim-content">
                   <h3 className="sim-title">{sim.title}</h3>
