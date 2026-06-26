@@ -6,6 +6,8 @@ import MobileMenu from './MobileMenu';
 import ResumeModal from './ResumeModal';
 import Footer from './Footer';
 
+
+
 type SimulatorData = {
   id: string;
   num: string;
@@ -68,6 +70,7 @@ const simulators: SimulatorData[] = [
     title: 'KHONSU SPACE SIMULATOR',
     desc: 'Built for the environments where human control becomes impossible. Validate autonomous systems across orbital operations, lunar missions, and the future of deep-space exploration.',
     cta: 'EXPLORE BEYOND EARTH',
+    image: '/assets/khonshu-space-simulator-img.jpg',
   },
   {
     id: 'telemetry-anomaly',
@@ -91,6 +94,8 @@ export default function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isHeroMuted, setIsHeroMuted] = useState(true);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+
+
   const containerRef = useRef<HTMLDivElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -196,6 +201,8 @@ export default function HomePage() {
       <main>
         {/* Page 1: Hero */}
         <section className="landing-section section-left" id="releases">
+
+
           <div className="video-background-container">
             <video 
               ref={heroVideoRef}
@@ -233,13 +240,20 @@ export default function HomePage() {
           </div>
         </section>
 
-        <hr className="divider-line" />
+        <div className="section-merge-boundary" />
 
         {/* Page 2: Aligning Human Intent */}
         <section className="landing-section section-left" id="platforms">
-          <div className="video-background-container">
+
+          <div className="video-background-container desktop-only">
             <video autoPlay muted loop playsInline className="video-background">
               <source src="/assets/robot-intent-section-two-vid.mp4" type="video/mp4" />
+            </video>
+            <div className="video-overlay" />
+          </div>
+          <div className="video-background-container mobile-only">
+            <video autoPlay muted loop playsInline className="video-background">
+              <source src="/assets/drone_flies_through_mobile.mp4" type="video/mp4" />
             </video>
             <div className="video-overlay" />
           </div>
@@ -266,16 +280,24 @@ export default function HomePage() {
           </div>
         </section>
 
-        <hr className="divider-line" />
+        <div className="section-merge-boundary" />
 
         {/* Page 3: Making Autonomy Human-Centric */}
         <section className="landing-section section-right" id="simulation">
+
+          <div className="image-background-container">
+            <img src="/assets/explore-ansa-img.jpg" alt="Making Autonomy Human-Centric" className="image-background explore-ansa-bg" />
+            <div className="overlay-right-dark" />
+          </div>
           <div className="section-content">
             <h2 className="section-title">
-              MAKING <br className="mob-br" />AUTONOMY <br className="mob-br" /><br className="desk-br" />HUMAN-CENTRIC
+              MAKING <br className="mob-br" />AUTONOMY <br />
+              HUMAN-CENTRIC
             </h2>
             <p className="section-body desktop-only">
-              ANSA is a complete autonomous intelligence platform designed to enable robots and drones to understand human intent, navigate complex environments, and execute missions with minimal human intervention.
+              ANSA is a complete autonomous intelligence platform designed to <br />
+              enable robots and drones to understand human intent, navigate complex <br />
+              environments, and execute missions with minimal human intervention.
             </p>
             <p className="section-body mobile-only">
               Spaceborn is a complete autonomous intelligence platform designed to enable robots and drones to understand context, navigate complex environments, and seamlessly interact with teams of human operators.
@@ -289,22 +311,25 @@ export default function HomePage() {
           </div>
         </section>
 
-        <hr className="divider-line" />
+        <div className="section-merge-boundary" />
 
         {/* Page 4: Building the Systems of Autonomy */}
         <section className="landing-section section-left" id="systems">
-          <div className="video-background-container">
-            <video autoPlay muted loop playsInline className="video-background">
-              <source src="/assets/4TH_PAGE.mp4" type="video/mp4" />
-            </video>
-            <div className="video-overlay" />
+
+          <div className="image-background-container">
+            <img src="/assets/book-your-flight-section-img.jpg" alt="Building the Systems of Autonomy" className="image-background systems-autonomy-bg" />
+            <div className="overlay-left-dark" />
           </div>
           <div className="section-content">
             <h2 className="section-title">
-              BUILDING THE <br className="mob-br" />SYSTEMS <br className="desk-br" />OF <br className="mob-br" />AUTONOMY
+              BUILDING THE <br />
+              SYSTEMS <br className="mob-br" />OF <br />
+              AUTONOMY
             </h2>
             <p className="section-body desktop-only">
-              Spaceborn develops flight controllers, autonomous intelligence platforms, and next-generation robotic systems designed to power the future of autonomous flight, ground mobility, and intelligent machines.
+              Spaceborn develops flight controllers, autonomous intelligence <br />
+              platforms, and next-generation robotic systems designed to power the <br />
+              future of autonomous flight, ground mobility, and intelligent machines.
             </p>
             <p className="section-body mobile-only">
               Spaceborn develops flight software, autonomous intelligence platforms, and next generation robotic systems designed to pave the future of autonomous flight, space industry, and intelligent machines.
@@ -318,68 +343,41 @@ export default function HomePage() {
           </div>
         </section>
 
-        <hr className="divider-line" />
+        <div className="section-merge-boundary" />
 
-        {/* Page 5: Putting Humans at the Center (Desktop) */}
-        <section className="landing-section section-right desktop-only" id="thoth">
+        {/* Page 5: Putting Humans at the Center */}
+        <section className="landing-section section-right" id="thoth">
           <div className="image-background-container">
-            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background" />
+            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background join-mission-bg" />
           </div>
           <div className="section-content">
             <h2 className="section-title">
-              PUTTING HUMANS AT THE<br />CENTER OF AUTONOMY
+              PUTTING HUMANS<br />
+              AT THE CENTER<br />
+              OF AUTONOMY
             </h2>
-            <p className="section-body">
-              Spaceborn was founded on the belief that robots should adapt to humans, not the other way around. We are building the intelligence layer that enables autonomous systems to understand human intent and act with confidence in the real world.
+            <p className="section-body desktop-only">
+              Spaceborn was founded on the belief that robots should adapt to humans, not the<br />
+              other way around. We are building the intelligence layer that enables autonomous<br />
+              systems to understand human intent and act with confidence in the real world.
             </p>
+            <p className="section-body mobile-only">
+              Spaceborn was founded on the belief that robots should adapt to humans, not the<br />
+              other way around. We are building the intelligence layer that enables autonomous<br />
+              systems to understand context and act with confidence in the real world.
+            </p>
+
             <a href="#simulators-hub" className="btn font-mono">
               join the mission
             </a>
           </div>
         </section>
 
-        {/* Page 5: Putting Humans at the Center (Mobile - Context) */}
-        <section className="landing-section section-left mobile-only" id="thoth">
-          <div className="image-background-container">
-            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background" />
-          </div>
-          <div className="section-content">
-            <h2 className="section-title">
-              PUTTING <br className="mob-br" />HUMANS AT THE <br className="mob-br" />CENTER OF <br className="mob-br" />AUTONOMY
-            </h2>
-            <p className="section-body">
-              Spaceborn was founded on the belief that robots should adapt to humans, not the other way around. We are building the intelligence layer that enables autonomous systems to understand context and act with confidence in the real world.
-            </p>
-            <a href="#khonsu" className="btn font-mono">
-              SEE THE MISSION
-            </a>
-          </div>
-        </section>
-
-        <hr className="divider-line mobile-only" />
-
-        {/* Page 6: Putting Humans at the Center (Mobile - Human Intent) */}
-        <section className="landing-section section-left mobile-only" id="khonsu">
-          <div className="image-background-container">
-            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background" />
-          </div>
-          <div className="section-content">
-            <h2 className="section-title">
-              PUTTING <br className="mob-br" />HUMANS AT THE <br className="mob-br" />CENTER OF <br className="mob-br" />AUTONOMY
-            </h2>
-            <p className="section-body">
-              Spaceborn was founded on the belief that robots should adapt to humans, not the other way around. We are building the intelligence layer that enables autonomous systems to understand human intent and act with confidence in the real world.
-            </p>
-            <a href="#simulators-hub" className="btn font-mono">
-              JOIN THE SYSTEM
-            </a>
-          </div>
-        </section>
-
-        <hr className="divider-line" />
+        <div className="section-merge-boundary" />
 
         {/* Page 6: Simulators Horizontal Scroll Container */}
         <section className="simulators-scroll-section" id="simulators-hub">
+
           <button 
             onClick={handlePrev}
             className={`sim-nav-btn sim-prev-btn ${scrollProgress <= 1 ? 'disabled' : ''}`}

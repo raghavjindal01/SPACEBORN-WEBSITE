@@ -58,7 +58,7 @@ export default function CareerPage() {
           </div>
         </section>
 
-        <hr className="divider-line" />
+        <div className="section-merge-boundary" />
 
         {/* Section 2: Shape the Age / Aligning Human Intent */}
         <section className="career-section-2">
@@ -88,7 +88,7 @@ export default function CareerPage() {
           </div>
         </section>
 
-        <hr className="divider-line" />
+        <div className="section-merge-boundary" />
 
         {/* Section 3: Quote Block */}
         <section className="career-section-3">
