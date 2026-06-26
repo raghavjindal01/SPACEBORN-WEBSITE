@@ -1,6 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs/promises';
 import path from 'path';
+import { uploadResumeSubmission } from '../../../backend/resumeService';
+
+export const runtime = 'nodejs';
+
+function getSafeUploadErrorMessage(error: unknown) {
+  if (!(error instanceof Error)) {
+    return 'An internal server error occurred while processing your upload.';
+  }
+
+  if (
+    error.message.includes('Google Drive service account env vars') ||
+    error.message.includes('GOOGLE_DRIVE_SERVICE_ACCOUNT_EMAIL') ||
+    error.message.includes('invalid_grant') ||
+    error.message.includes('invalid_request') ||
+    error.message.includes('File not found') ||
+    error.message.includes('insufficient') ||
+    error.message.includes('storage quota') ||
+    error.message.includes('storageQuotaExceeded')
+  ) {
+    return error.message;
+  }
+
+  return process.env.NODE_ENV === 'production'
+    ? 'An internal server error occurred while processing your upload.'
+    : error.message;
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -46,65 +71,37 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    // Setup uploads directory path in workspace root
-    const uploadsDir = path.join(process.cwd(), 'uploads');
-    await fs.mkdir(uploadsDir, { recursive: true });
-
-    // Generate safe unique filename
-    const timestamp = Date.now();
-    const cleanOriginalName = resume.name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
-    const savedFileName = `${timestamp}_${cleanOriginalName}`;
-    const filePath = path.join(uploadsDir, savedFileName);
-
-    // Save the file
     const arrayBuffer = await resume.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    await fs.writeFile(filePath, buffer);
-
-    // Append entry to local submissions.json (mock database)
-    const submissionsPath = path.join(uploadsDir, 'submissions.json');
-    let submissions = [];
-    
-    try {
-      const existingData = await fs.readFile(submissionsPath, 'utf8');
-      submissions = JSON.parse(existingData);
-      if (!Array.isArray(submissions)) {
-        submissions = [];
-      }
-    } catch (error) {
-      // submissions.json doesn't exist yet, proceed with empty array
-    }
-
-    const submissionId = `sub_${timestamp}`;
-    const newSubmission = {
-      id: submissionId,
+    const uploadedResume = await uploadResumeSubmission({
       name: name.trim(),
       email: email.trim(),
       phone: phone ? phone.trim() : '',
       message: message ? message.trim() : '',
-      resumeFileName: resume.name,
-      savedFileName: savedFileName,
-      timestamp: new Date().toISOString(),
-    };
-
-    submissions.push(newSubmission);
-    await fs.writeFile(submissionsPath, JSON.stringify(submissions, null, 2), 'utf8');
+      originalFileName: resume.name,
+      mimeType: resume.type,
+      fileBuffer: buffer,
+    });
 
     return NextResponse.json({
       success: true,
-      message: 'Submission successfully received!',
+      message: 'Submission successfully uploaded to Google Drive!',
       data: {
-        id: submissionId,
-        name: newSubmission.name,
-        email: newSubmission.email,
-        fileName: newSubmission.resumeFileName,
+        id: uploadedResume.submissionId,
+        name: name.trim(),
+        email: email.trim(),
+        fileName: resume.name,
+        savedFileName: uploadedResume.savedFileName,
+        driveFileId: uploadedResume.driveFileId,
+        driveFolderName: uploadedResume.driveFolderName,
       }
     });
 
   } catch (error: any) {
     console.error('Error handling resume upload API request:', error);
+
     return NextResponse.json({ 
-      error: 'An internal server error occurred while processing your upload.' 
+      error: getSafeUploadErrorMessage(error),
     }, { status: 500 });
   }
 }
