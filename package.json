@@ -6,15 +6,19 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "drive:auth": "node scripts/google-drive-oauth.cjs"
   },
   "dependencies": {
+    "googleapis": "^173.0.0",
     "next": "^16.2.7",
+    "nodemailer": "^9.0.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
     "@types/node": "latest",
+    "@types/nodemailer": "^8.0.1",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "typescript": "latest"
