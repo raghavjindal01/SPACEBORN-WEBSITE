@@ -16,6 +16,7 @@ type SimulatorData = {
   cta: string;
   image?: string;
   imageMobile?: string;
+  video?: string;
 };
 
 const simulators: SimulatorData[] = [
@@ -27,6 +28,7 @@ const simulators: SimulatorData[] = [
     cta: 'ENTER THE CORE',
     image: '/assets/sitl_kernel_simulator_img.jpg',
     imageMobile: '/assets/mobile/asset-6.jpg',
+    video: '/assets/ansa-sitl-kernel-gif.mp4',
   },
   {
     id: 'digital-twin',
@@ -36,6 +38,7 @@ const simulators: SimulatorData[] = [
     cta: 'EXPLORE THE DIGITAL TWIN',
     image: '/assets/ansa-digital-twin.jpg',
     imageMobile: '/assets/mobile/asset-7.jpg',
+    video: '/assets/digital-twin-gif.mp4',
   },
   {
     id: 'fault-failure',
@@ -81,6 +84,7 @@ const simulators: SimulatorData[] = [
     cta: 'EXPLORE BEYOND EARTH',
     image: '/assets/khonshu-space-simulator-img.jpg',
     imageMobile: '/assets/mobile/asset-12.jpg',
+    video: '/assets/khonshu-space-simulator-gif.mp4',
   },
   {
     id: 'telemetry-anomaly',
@@ -106,32 +110,16 @@ export default function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isHeroMuted, setIsHeroMuted] = useState(true);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
-
+  const [activeSection, setActiveSection] = useState<string>('releases');
 
   const containerRef = useRef<HTMLDivElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const systemsVideoRef = useRef<HTMLVideoElement>(null);
+  const simVideoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
 
   const handleToggleSound = () => {
-    const video = heroVideoRef.current;
-    const audio = audioRef.current;
-    const nextMuted = !isHeroMuted;
-    
-    setIsHeroMuted(nextMuted);
-    
-    if (video) {
-      video.muted = nextMuted;
-      video.play().catch((err) => console.log("Play failed on sound toggle:", err));
-    }
-    
-    if (audio) {
-      audio.muted = nextMuted;
-      if (!nextMuted) {
-        audio.play().catch((err) => console.log("Audio play failed:", err));
-      } else {
-        audio.pause();
-      }
-    }
+    setIsHeroMuted((prev) => !prev);
   };
 
   useEffect(() => {
@@ -146,6 +134,96 @@ export default function HomePage() {
       console.log("Muted autoplay blocked initially:", error);
     });
   }, []);
+
+  // Intersection Observer to track active section / simulator panel
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5, // 50% visibility
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe vertical pages
+    const verticalPages = ['releases', 'platforms', 'simulation', 'systems', 'thoth'];
+    verticalPages.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // Observe individual simulator panels inside the horizontal scroll
+    simulators.forEach((sim) => {
+      const el = document.getElementById(`sim-${sim.id}`);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  // Synchronize audio and video mute/play states based on active section and global mute state
+  useEffect(() => {
+    const isMuted = isHeroMuted;
+
+    // 1. Hero Page 1 (id="releases")
+    const heroVideo = heroVideoRef.current;
+    const heroAudio = audioRef.current;
+    const isHeroActive = activeSection === 'releases';
+    const heroMute = isMuted || !isHeroActive;
+
+    if (heroVideo) {
+      heroVideo.muted = heroMute;
+      if (!heroMute) {
+        heroVideo.play().catch((err) => console.log("Hero video play failed:", err));
+      }
+    }
+    if (heroAudio) {
+      heroAudio.muted = heroMute;
+      if (!heroMute) {
+        heroAudio.play().catch((err) => console.log("Hero audio play failed:", err));
+      } else {
+        heroAudio.pause();
+      }
+    }
+
+    // 2. Page 2 (id="platforms") - keep current behavior (always muted)
+    // This is handled by having muted={true} on the Page 2 video elements in JSX.
+
+    // 3. Page 4 Systems (id="systems")
+    const systemsVideo = systemsVideoRef.current;
+    const isSystemsActive = activeSection === 'systems';
+    const systemsMute = isMuted || !isSystemsActive;
+
+    if (systemsVideo) {
+      systemsVideo.muted = systemsMute;
+      if (!systemsMute) {
+        systemsVideo.play().catch((err) => console.log("Systems video play failed:", err));
+      }
+    }
+
+    // 4. Simulator panels
+    simulators.forEach((sim) => {
+      const simVideo = simVideoRefs.current[sim.id];
+      if (simVideo) {
+        const isSimActive = activeSection === `sim-${sim.id}`;
+        const simMute = isMuted || !isSimActive;
+        simVideo.muted = simMute;
+        if (!simMute) {
+          simVideo.play().catch((err) => console.log(`Sim ${sim.id} video play failed:`, err));
+        }
+      }
+    });
+  }, [activeSection, isHeroMuted]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -332,9 +410,17 @@ export default function HomePage() {
         {/* Page 4: Building the Systems of Autonomy */}
         <section className="landing-section section-left" id="systems">
 
-          <div className="image-background-container">
-            <img src="/assets/book-your-flight-section-img.jpg" alt="Building the Systems of Autonomy" className="image-background systems-autonomy-bg desktop-only" />
-            <img src="/assets/mobile/asset-4.jpg" alt="Building the Systems of Autonomy" className="image-background systems-autonomy-bg mobile-only" />
+          <div className="video-background-container">
+            <video 
+              ref={systemsVideoRef}
+              autoPlay 
+              muted={isHeroMuted} 
+              loop 
+              playsInline 
+              className="video-background"
+            >
+              <source src="/assets/flight-controller-gif.mp4" type="video/mp4" />
+            </video>
             <div className="overlay-left-dark" />
           </div>
           <div className="section-content">
@@ -431,7 +517,24 @@ export default function HomePage() {
                     : undefined
                 }
               >
-                <div className="sim-content">
+                {sim.video && (
+                  <div className="video-background-container">
+                    <video 
+                      ref={(el) => {
+                        simVideoRefs.current[sim.id] = el;
+                      }}
+                      autoPlay 
+                      muted={isHeroMuted} 
+                      loop 
+                      playsInline 
+                      className="video-background"
+                    >
+                      <source src={sim.video} type="video/mp4" />
+                    </video>
+                    <div className="video-overlay" />
+                  </div>
+                )}
+                <div className="sim-content" style={{ position: 'relative', zIndex: 2 }}>
                   <h3 className="sim-title">{sim.title}</h3>
                   <p className="sim-desc">{sim.desc}</p>
                   <a href="#releases" className="btn font-mono">
