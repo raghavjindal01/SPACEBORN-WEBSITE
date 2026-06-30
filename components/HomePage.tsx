@@ -1,4 +1,6 @@
 'use client';
+import { LazyVideo } from "./LazyVideo";
+import { optimizeCloudinary } from "../lib/utils";
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
@@ -26,9 +28,9 @@ const simulators: SimulatorData[] = [
     title: 'ANSA-SITL KERNEL SIMULATOR',
     desc: 'The digital heartbeat of ANSA. Every decision, every control loop, and every autonomous action begins here before reaching the real world.',
     cta: 'ENTER THE CORE',
-    image: '/assets/sitl_kernel_simulator_img.jpg',
-    imageMobile: '/assets/mobile/asset-6.jpg',
-    video: '/assets/ansa-sitl-kernel-gif.mp4',
+    image: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734322/spaceborn_assets/sitl_kernel_simulator_img.jpg',
+    imageMobile: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734315/spaceborn_assets/mobile/asset-6.jpg',
+    video: optimizeCloudinary('https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734268/spaceborn_assets/ansa-sitl-kernel-gif.mp4'),
   },
   {
     id: 'digital-twin',
@@ -36,9 +38,9 @@ const simulators: SimulatorData[] = [
     title: 'ANSA DIGITAL TWIN SIMULATOR',
     desc: 'Build it once. Fly it a thousand times. A living digital replica where systems are tested, broken, and perfected before a single component is manufactured.',
     cta: 'EXPLORE THE DIGITAL TWIN',
-    image: '/assets/ansa-digital-twin.jpg',
-    imageMobile: '/assets/mobile/asset-7.jpg',
-    video: '/assets/digital-twin-gif.mp4',
+    image: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734264/spaceborn_assets/ansa-digital-twin.jpg',
+    imageMobile: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734316/spaceborn_assets/mobile/asset-7.jpg',
+    video: optimizeCloudinary('https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734271/spaceborn_assets/digital-twin-gif.mp4'),
   },
   {
     id: 'fault-failure',
@@ -46,8 +48,8 @@ const simulators: SimulatorData[] = [
     title: 'FAULT & FAILURE SCENARIO SIMULATOR',
     desc: "Failure isn't avoided. It's engineered for. Push autonomous systems through catastrophic scenarios and prove they can survive when everything goes wrong.",
     cta: 'TEST THE LIMITS',
-    image: '/assets/fault_failure_simulator_img.jpg',
-    imageMobile: '/assets/mobile/asset-8.jpg',
+    image: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734276/spaceborn_assets/fault_failure_simulator_img.jpg',
+    imageMobile: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734316/spaceborn_assets/mobile/asset-8.jpg',
   },
   {
     id: 'gps-denied',
@@ -55,8 +57,8 @@ const simulators: SimulatorData[] = [
     title: 'GPS-DENIED NAVIGATION SIMULATOR',
     desc: 'When satellites disappear, autonomy takes over. Train intelligent systems to navigate confidently through urban canyons, tunnels, and contested environments.',
     cta: 'ENTER DENIED TERRITORY',
-    image: '/assets/gps_denied_simulator_img.jpg',
-    imageMobile: '/assets/mobile/asset-9.jpg',
+    image: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734281/spaceborn_assets/gps_denied_simulator_img.jpg',
+    imageMobile: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734318/spaceborn_assets/mobile/asset-9.jpg',
   },
   {
     id: 'swarm-fleet',
@@ -64,8 +66,8 @@ const simulators: SimulatorData[] = [
     title: 'SWARM & FLEET SIMULATOR',
     desc: 'One vehicle is impressive. One hundred moving as a single intelligence changes everything. Validate coordinated autonomy at fleet scale.',
     cta: 'COMMAND THE SWARM',
-    image: '/assets/swarm_simulator_img.jpg',
-    imageMobile: '/assets/mobile/asset-10.jpg',
+    image: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734334/spaceborn_assets/swarm_simulator_img.jpg',
+    imageMobile: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734303/spaceborn_assets/mobile/asset-10.jpg',
   },
   {
     id: 'lidar-depth',
@@ -73,8 +75,8 @@ const simulators: SimulatorData[] = [
     title: 'LiDAR & DEPTH PERCEPTION SIMULATOR',
     desc: 'Teach machines to see the world in three dimensions. Generate massive volumes of spatial intelligence for mapping, navigation, and next-generation perception systems.',
     cta: 'EXPLORE MACHINE PERCEPTION',
-    image: '/assets/lidar-sim-new.jpg',
-    imageMobile: '/assets/mobile/asset-11.jpg',
+    image: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734289/spaceborn_assets/lidar-sim-new.jpg',
+    imageMobile: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734304/spaceborn_assets/mobile/asset-11.jpg',
   },
   {
     id: 'khonsu-space',
@@ -82,9 +84,9 @@ const simulators: SimulatorData[] = [
     title: 'KHONSU SPACE SIMULATOR',
     desc: 'Built for the environments where human control becomes impossible. Validate autonomous systems across orbital operations, lunar missions, and the future of deep-space exploration.',
     cta: 'EXPLORE BEYOND EARTH',
-    image: '/assets/khonshu-space-simulator-img.jpg',
-    imageMobile: '/assets/mobile/asset-12.jpg',
-    video: '/assets/khonshu-space-simulator-gif.mp4',
+    image: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734287/spaceborn_assets/khonshu-space-simulator-img.jpg',
+    imageMobile: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734305/spaceborn_assets/mobile/asset-12.jpg',
+    video: optimizeCloudinary('https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734285/spaceborn_assets/khonshu-space-simulator-gif.mp4'),
   },
   {
     id: 'telemetry-anomaly',
@@ -92,8 +94,8 @@ const simulators: SimulatorData[] = [
     title: 'TELEMETRY ANOMALY SIMULATOR',
     desc: 'The difference between a mission and a failure is knowing what happens next. Train AI systems to identify anomalies before they become critical events.',
     cta: 'PREDICT THE UNEXPECTED',
-    image: '/assets/telemetry_simulator_img.jpg',
-    imageMobile: '/assets/mobile/asset-13.jpg',
+    image: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734336/spaceborn_assets/telemetry_simulator_img.jpg',
+    imageMobile: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734306/spaceborn_assets/mobile/asset-13.jpg',
   },
   {
     id: 'hal-portability',
@@ -101,8 +103,8 @@ const simulators: SimulatorData[] = [
     title: 'HAL PORTABILITY EMULATOR',
     desc: 'One intelligence. Infinite hardware. Certify autonomous systems across platforms without rewriting the software that powers them.',
     cta: 'VALIDATE COMPATIBILITY',
-    image: '/assets/hal_portability_simulator_img.jpg',
-    imageMobile: '/assets/mobile/asset-14.jpg',
+    image: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734282/spaceborn_assets/hal_portability_simulator_img.jpg',
+    imageMobile: 'https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734307/spaceborn_assets/mobile/asset-14.jpg',
   },
 ];
 
@@ -273,7 +275,7 @@ export default function HomePage() {
       <header className="navbar-wrapper">
         <nav className="navbar">
           <Link href="/" className="logo" aria-label="Spaceborn home">
-            <img src="/assets/spaceborn-transparent-logo.png" alt="Spaceborn Logo" />
+            <img src="https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734333/spaceborn_assets/spaceborn-transparent-logo.png" alt="Spaceborn Logo" />
           </Link>
           <ul className="nav-links">
             <li><a href="#platforms">PLATFORMS</a></li>
@@ -302,20 +304,30 @@ export default function HomePage() {
               playsInline 
               className="video-background"
             >
-              <source media="(max-width: 1100px)" src="/assets/mobile/asset-1.mp4" type="video/mp4" />
-              <source src="/assets/spaceborn-hero-GIF.mp4" type="video/mp4" />
+              <source media="(max-width: 1100px)" src={optimizeCloudinary("https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734300/spaceborn_assets/mobile/asset-1.mp4")} type="video/mp4" />
+              <source src={optimizeCloudinary("https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734329/spaceborn_assets/spaceborn-hero-GIF.mp4")} type="video/mp4" />
             </video>
             <audio 
               ref={audioRef}
               loop
               preload="auto"
             >
-              <source media="(max-width: 1100px)" src="/assets/mobile/asset-1.mp3" type="audio/mp3" />
-              <source src="/assets/spaceborn-hero-GIF-audio.mp3" type="audio/mp3" />
+              <source media="(max-width: 1100px)" src={optimizeCloudinary("https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734291/spaceborn_assets/mobile/asset-1.mp3")} type="audio/mp3" />
+              <source src={optimizeCloudinary("https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734323/spaceborn_assets/spaceborn-hero-GIF-audio.mp3")} type="audio/mp3" />
             </audio>
             <div className="video-overlay" />
           </div>
           <div className="section-content">
+            <div className="hero-date font-mono" style={{ 
+              fontSize: '14px', 
+              color: 'var(--text)', 
+              opacity: 0.8, 
+              letterSpacing: '3px', 
+              marginBottom: '12px',
+              textTransform: 'uppercase'
+            }}>
+              MAY 12, 2026
+            </div>
             <h1 className="section-title">
               CERTAINTY <br className="mob-br" />IS <br className="desk-br" />READY <br className="mob-br" />FOR FLIGHT
             </h1>
@@ -339,15 +351,15 @@ export default function HomePage() {
         <section className="landing-section section-left" id="platforms">
 
           <div className="video-background-container desktop-only">
-            <video autoPlay muted loop playsInline className="video-background">
-              <source src="/assets/robot-intent-section-two-vid.mp4" type="video/mp4" />
-            </video>
+            <LazyVideo autoPlay muted loop playsInline className="video-background">
+              <source src={optimizeCloudinary("https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734320/spaceborn_assets/robot-intent-section-two-vid.mp4")} type="video/mp4" />
+            </LazyVideo>
             <div className="video-overlay" />
           </div>
           <div className="video-background-container mobile-only">
-            <video autoPlay muted loop playsInline className="video-background">
-              <source src="/assets/mobile/asset-2.mp4" type="video/mp4" />
-            </video>
+            <LazyVideo autoPlay muted loop playsInline className="video-background">
+              <source src={optimizeCloudinary("https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734309/spaceborn_assets/mobile/asset-2.mp4")} type="video/mp4" />
+            </LazyVideo>
             <div className="video-overlay" />
           </div>
           <div className="section-content">
@@ -379,8 +391,8 @@ export default function HomePage() {
         <section className="landing-section section-right" id="simulation">
 
           <div className="image-background-container">
-            <img src="/assets/explore-ansa-img.jpg" alt="Making Autonomy Human-Centric" className="image-background explore-ansa-bg desktop-only" />
-            <img src="/assets/mobile/asset-3.jpg" alt="Making Autonomy Human-Centric" className="image-background explore-ansa-bg mobile-only" />
+            <img loading="lazy" src="https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734275/spaceborn_assets/explore-ansa-img.jpg" alt="Making Autonomy Human-Centric" className="image-background explore-ansa-bg desktop-only" />
+            <img loading="lazy" src="https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734311/spaceborn_assets/mobile/asset-3.jpg" alt="Making Autonomy Human-Centric" className="image-background explore-ansa-bg mobile-only" />
             <div className="overlay-right-dark" />
           </div>
           <div className="section-content">
@@ -411,7 +423,7 @@ export default function HomePage() {
         <section className="landing-section section-left" id="systems">
 
           <div className="video-background-container">
-            <video 
+            <LazyVideo 
               ref={systemsVideoRef}
               autoPlay 
               muted={isHeroMuted} 
@@ -419,8 +431,8 @@ export default function HomePage() {
               playsInline 
               className="video-background"
             >
-              <source src="/assets/flight-controller-gif.mp4" type="video/mp4" />
-            </video>
+              <source src={optimizeCloudinary("https://res.cloudinary.com/dq9x4mk1y/video/upload/v1782734279/spaceborn_assets/flight-controller-gif.mp4")} type="video/mp4" />
+            </LazyVideo>
             <div className="overlay-left-dark" />
           </div>
           <div className="section-content">
@@ -451,8 +463,8 @@ export default function HomePage() {
         {/* Page 5: Putting Humans at the Center */}
         <section className="landing-section section-right" id="thoth">
           <div className="image-background-container">
-            <img src="/assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background join-mission-bg desktop-only" />
-            <img src="/assets/mobile/asset-5.jpg" alt="Join Our Mission" className="image-background join-mission-bg mobile-only" />
+            <img loading="lazy" src="https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734283/spaceborn_assets/join-our-mission-section-img.jpg" alt="Join Our Mission" className="image-background join-mission-bg desktop-only" />
+            <img loading="lazy" src="https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734314/spaceborn_assets/mobile/asset-5.jpg" alt="Join Our Mission" className="image-background join-mission-bg mobile-only" />
           </div>
           <div className="section-content">
             <h2 className="section-title">
@@ -519,7 +531,7 @@ export default function HomePage() {
               >
                 {sim.video && (
                   <div className="video-background-container">
-                    <video 
+                    <LazyVideo 
                       ref={(el) => {
                         simVideoRefs.current[sim.id] = el;
                       }}
@@ -530,7 +542,7 @@ export default function HomePage() {
                       className="video-background"
                     >
                       <source src={sim.video} type="video/mp4" />
-                    </video>
+                    </LazyVideo>
                     <div className="video-overlay" />
                   </div>
                 )}

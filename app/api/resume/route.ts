@@ -37,17 +37,14 @@ export async function POST(request: NextRequest) {
     const resume = formData.get('resume') as File | null;
 
     // Validation
-    if (!name || !name.trim()) {
-      return NextResponse.json({ error: 'Name is required.' }, { status: 400 });
-    }
+    const finalName = name && name.trim() ? name.trim() : 'Applicant';
+    const finalEmail = email && email.trim() ? email.trim() : 'no-email@spaceborn.com';
 
-    if (!email || !email.trim()) {
-      return NextResponse.json({ error: 'Email is required.' }, { status: 400 });
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json({ error: 'Invalid email address format.' }, { status: 400 });
+    if (email && email.trim()) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return NextResponse.json({ error: 'Invalid email address format.' }, { status: 400 });
+      }
     }
 
     if (!resume) {
@@ -74,8 +71,8 @@ export async function POST(request: NextRequest) {
     const arrayBuffer = await resume.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     const uploadedResume = await uploadResumeSubmission({
-      name: name.trim(),
-      email: email.trim(),
+      name: finalName,
+      email: finalEmail,
       phone: phone ? phone.trim() : '',
       message: message ? message.trim() : '',
       originalFileName: resume.name,
@@ -88,8 +85,8 @@ export async function POST(request: NextRequest) {
       message: 'Submission successfully uploaded to Google Drive!',
       data: {
         id: uploadedResume.submissionId,
-        name: name.trim(),
-        email: email.trim(),
+        name: finalName,
+        email: finalEmail,
         fileName: resume.name,
         savedFileName: uploadedResume.savedFileName,
         driveFileId: uploadedResume.driveFileId,

@@ -1,16 +1,12 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import CeoContactModal from './CeoContactModal';
 
 type FooterProps = {
   isHome?: boolean;
 };
 
 export default function Footer({ isHome = false }: FooterProps) {
-  const [isCeoModalOpen, setIsCeoModalOpen] = useState(false);
-
   const footerContent = (
     <>
       <div className="footer-social-group">
@@ -21,15 +17,15 @@ export default function Footer({ isHome = false }: FooterProps) {
           className="linkedin-link" 
           aria-label="Spaceborn LinkedIn"
         >
-          <img src="/assets/linkedin-icon.png" alt="LinkedIn Logo" />
+          <img src="https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734290/spaceborn_assets/linkedin-icon.png" alt="LinkedIn Logo" />
         </a>
-        <button 
-          onClick={() => setIsCeoModalOpen(true)} 
+        <a 
+          href="mailto:adarshkumar@spaceborn.in" 
           className="ceo-contact-btn font-mono"
-          type="button"
+          style={{ textDecoration: 'none', display: 'inline-block' }}
         >
           CONTACT OUR CEO
-        </button>
+        </a>
       </div>
 
       <ul className="footer-nav">
@@ -46,10 +42,6 @@ export default function Footer({ isHome = false }: FooterProps) {
       <span className="footer-copyright">
         COPYRIGHT © 2026 SPACEBORN
       </span>
-
-      {isCeoModalOpen && (
-        <CeoContactModal onClose={() => setIsCeoModalOpen(false)} />
-      )}
     </>
   );
 

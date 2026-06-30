@@ -13,7 +13,7 @@ export default function CareerPage() {
       <header className="navbar-wrapper">
         <nav className="navbar">
           <Link href="/" className="logo" aria-label="Spaceborn home">
-            <img src="/assets/spaceborn-transparent-logo.png" alt="Spaceborn Logo" />
+            <img src="https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734333/spaceborn_assets/spaceborn-transparent-logo.png" alt="Spaceborn Logo" />
           </Link>
           <ul className="nav-links">
             <li><Link href="/#platforms">PLATFORMS</Link></li>

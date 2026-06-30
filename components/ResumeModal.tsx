@@ -7,10 +7,6 @@ type ResumeModalProps = {
 };
 
 export default function ResumeModal({ onClose }: ResumeModalProps) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
   const [file, setFile] = useState<File | null>(null);
 
   const [isDragging, setIsDragging] = useState(false);
@@ -107,14 +103,6 @@ export default function ResumeModal({ onClose }: ResumeModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!name.trim()) {
-      setError('Please enter your full name.');
-      return;
-    }
-    if (!email.trim()) {
-      setError('Please enter your email address.');
-      return;
-    }
     if (!file) {
       setError('Please upload your resume.');
       return;
@@ -125,10 +113,6 @@ export default function ResumeModal({ onClose }: ResumeModalProps) {
 
     try {
       const formData = new FormData();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('phone', phone);
-      formData.append('message', message);
       formData.append('resume', file);
 
       const response = await fetch('/api/resume', {
@@ -179,59 +163,6 @@ export default function ResumeModal({ onClose }: ResumeModalProps) {
               )}
 
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="fullName" className="form-label">Full Name *</label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    className="form-input"
-                    placeholder="Enter your name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email" className="form-label">Email Address *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    className="form-input"
-                    placeholder="name@company.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="phone" className="form-label">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    className="form-input"
-                    placeholder="+1 (555) 000-0000"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    disabled={isSubmitting}
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="message" className="form-label">Cover Note / Message</label>
-                  <textarea
-                    id="message"
-                    className="form-input form-textarea"
-                    placeholder="Tell us briefly why you want to build the future of autonomy with Spaceborn..."
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    disabled={isSubmitting}
-                  />
-                </div>
-
                 <div className="form-group" style={{ marginBottom: '30px' }}>
                   <label className="form-label">Resume / CV *</label>
                   <input
@@ -309,7 +240,7 @@ export default function ResumeModal({ onClose }: ResumeModalProps) {
               </div>
               <h2 className="success-title font-ethno">Transmission Verified</h2>
               <p className="success-message font-mono">
-                Thank you, {name}. Your application was successfully processed and saved. Our recruiting team will review your credentials and be in touch soon.
+                Thank you. Your application was successfully processed and saved. Our recruiting team will review your credentials and be in touch soon.
               </p>
               <button 
                 type="button" 

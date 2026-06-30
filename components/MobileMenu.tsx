@@ -18,7 +18,7 @@ export default function MobileMenu({ isCareer }: { isCareer?: boolean }) {
     <div className="mobile-menu-overlay">
       <div className="mobile-menu-header">
         <Link href="/" className="logo" onClick={toggleMenu}>
-          <img src="/assets/spaceborn-transparent-logo.png" alt="Spaceborn" />
+          <img src="https://res.cloudinary.com/dq9x4mk1y/image/upload/v1782734333/spaceborn_assets/spaceborn-transparent-logo.png" alt="Spaceborn" />
         </Link>
         <button className="close-menu" onClick={toggleMenu} aria-label="Close menu">✕</button>
       </div>
